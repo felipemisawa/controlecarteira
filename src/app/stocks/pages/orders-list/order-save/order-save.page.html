@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/orders"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{pageTitle}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="orderForm" (submit)="onSubmit()">
+    <ion-item>
+      <ion-icon name="checkmark" slot="start" color="primary"></ion-icon>
+      <ion-select placeholder="Buy / Sell" autofocus="true" formControlName="type">
+        <ion-select-option value="C">Buy</ion-select-option>
+        <ion-select-option value="V">Sell</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="calendar" slot="start" color="primary"></ion-icon>
+      <ion-datetime
+        type="date"
+        displayFormat="DD/MM/YYYY"
+        placeholder="Date"
+        inputmode="date"
+        formControlName="date"
+        text-left
+      >
+      </ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="paper" slot="start" color="primary"></ion-icon>
+      <ion-input type="text" placeholder="Ticker" inputmode="text" formControlName="ticker">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="wallet" slot="start" color="primary"></ion-icon>
+      <ion-input type="number" placeholder="Amount" inputmode="number" formControlName="amount">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="cash" slot="start" color="primary"></ion-icon>
+      <ion-input type="number" placeholder="Unit Price" inputmode="number" formControlName="price">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="stats" slot="start" color="primary"></ion-icon>
+      <ion-input
+        type="number"
+        placeholder="Total Fees"
+        inputmode="number"
+        formControlName="totalFees"
+      >
+      </ion-input>
+    </ion-item>
+    <ion-button expand="full" type="submit" [disabled]="orderForm.invalid">
+      Save
+    </ion-button>
+  </form>
+</ion-content>

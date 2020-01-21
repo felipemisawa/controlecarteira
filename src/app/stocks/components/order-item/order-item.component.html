@@ -1,0 +1,40 @@
+<ion-item-sliding #sliding>
+  <ion-item (click)="show.emit(order)">
+    <ion-label side="start">{{ order.type }}</ion-label>
+    <ion-label
+      side="center"
+      text-center
+    >
+      {{ order.amount }}
+    </ion-label>
+    <ion-label
+      side="center"
+      text-center
+    >
+      {{ order.ticker }}
+    </ion-label>
+    <ion-label
+      side="end"
+      text-right
+    >
+      {{ order.date | date: 'dd/MM/yyyy' }}
+    </ion-label>
+  </ion-item>
+  <ion-item-options side="start">
+    <ion-item-option
+      color="danger"
+      (click)="delete.emit(order); sliding.close()"
+    >
+      <ion-icon
+        slot="icon-only"
+        name="trash"
+      ></ion-icon>
+    </ion-item-option>
+    <ion-item-option (click)="update.emit(order); sliding.close()">
+      <ion-icon
+        slot="icon-only"
+        name="create"
+      ></ion-icon>
+    </ion-item-option>
+  </ion-item-options>
+</ion-item-sliding>

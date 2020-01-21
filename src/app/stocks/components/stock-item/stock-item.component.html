@@ -1,0 +1,20 @@
+<ion-item (click)="show.emit(stock)">
+  <ion-label
+    side="start"
+    text-center
+  >
+    {{ stock.ticker }}
+  </ion-label>
+  <ion-label
+    side="center"
+    text-center
+  >
+    {{ stock.amount }}
+  </ion-label>
+  <ion-label
+    side="center"
+    text-center
+  >
+    {{ stock.totalCost | currency:'BRL' }}
+  </ion-label>
+</ion-item>

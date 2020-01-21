@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/orders"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Order Show</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding *ngIf="orderData">
+  <ion-item>
+    <ion-label fixed slot="start" color="primary">
+      Type
+    </ion-label>
+    <ion-label readonly autofocus="true" text-right>
+      {{orderData.type}}
+    </ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label fixed slot="start" color="primary">
+      Date
+    </ion-label>
+    <ion-label text-right readonly autofocus="true">
+      {{orderData.date | date: 'dd/MM/yyyy'}}
+    </ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label fixed slot="start" color="primary">
+      Ticker
+    </ion-label>
+    <ion-label s text-right readonly type="text">
+      {{orderData.ticker}}
+    </ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label fixed slot="start" color="primary">
+      Amount
+    </ion-label>
+    <ion-label s text-right readonly type="number">
+      {{orderData.amount}}
+    </ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label fixed slot="start" color="primary">
+      Price
+    </ion-label>
+    <ion-label s text-right readonly type="number">
+      {{orderData.price | currency:'BRL'}}
+    </ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label fixed slot="start" color="primary">
+      Total Fees
+    </ion-label>
+    <ion-label text-right readonly type="number">
+      {{orderData.totalFees | currency:'BRL'}}
+    </ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label fixed slot="start" color="primary">
+      Order Total
+    </ion-label>
+    <ion-label s text-right readonly type="number">
+      {{orderData.orderTotal | currency:'BRL'}}
+    </ion-label>
+  </ion-item>
+  <ion-item *ngIf="orderData.type == 'V'">
+    <ion-label fixed slot="start" color="primary">
+      Profit
+    </ion-label>
+    <ion-label s text-right readonly type="number">
+      {{orderData.profit | currency:'BRL'}}
+    </ion-label>
+  </ion-item>
+</ion-content>

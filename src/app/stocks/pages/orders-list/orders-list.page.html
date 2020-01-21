@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/stocks"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Orders List</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-item>
+    <ion-label side="start">Type</ion-label>
+    <ion-label
+      side="center"
+      text-center
+    >
+      Amount
+    </ion-label>
+    <ion-label
+      side="center"
+      text-center
+    >
+      Ticker
+    </ion-label>
+    <ion-label
+      side="end"
+      text-right
+    >
+      Date
+    </ion-label>
+  </ion-item>
+  <ion-list *ngIf="(orders$ | async) as orders">
+    <ng-container *ngIf="orders.length > 0; else noOrders">
+      <app-order-item
+        *ngFor="let order of orders"
+        [order]="order"
+        (update)="onUpdate($event)"
+        (delete)="onDelete($event)"
+        (show)="onShow($event)"
+      ></app-order-item>
+    </ng-container>
+    <ng-template #noOrders>
+      <ion-item lines="none">No order found!</ion-item>
+    </ng-template>
+  </ion-list>
+
+  <ion-fab
+    vertical="bottom"
+    horizontal="end"
+    slot="fixed"
+  >
+    <ion-fab-button
+      routerLink="/orders/create"
+      routerDirection="forward"
+    >
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <app-menu-toggle
+      slot="start"
+      menu="main-menu"
+    ></app-menu-toggle>
+    <ion-title>Stocks List</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-item>
+    <ion-label
+      side="center"
+      text-center
+    >
+      Ticker
+    </ion-label>
+    <ion-label
+      side="center"
+      text-center
+    >
+      Amount
+    </ion-label>
+    <ion-label
+      side="center"
+      text-center
+    >
+      Total Cost
+    </ion-label>
+  </ion-item>
+  <ion-list *ngIf="(stocks$ | async) as stocks">
+    <ng-container *ngIf="stocks.length > 0; else noStocks">
+      <app-stock-item
+        *ngFor="let stock of stocks"
+        [stock]="stock"
+        (show)="onShow($event)"
+      ></app-stock-item>
+    </ng-container>
+    <ng-template #noStocks>
+      <ion-item lines="none">No stock found!</ion-item>
+    </ng-template>
+  </ion-list>
+
+  <ion-fab
+    vertical="bottom"
+    horizontal="end"
+    slot="fixed"
+  >
+    <ion-fab-button
+      routerLink="/orders/create"
+      routerDirection="forward"
+    >
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
