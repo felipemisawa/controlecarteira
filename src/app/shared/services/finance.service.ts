@@ -22,7 +22,16 @@ export class FinanceService {
       guess = 0.0001;
     }
     const investment = cashflows[0];
+    let sum = 0;
+    cashflows.forEach(cf => {
+      sum += cf;
+    });
     let rate = 1;
+    if (sum < 0) {
+      rate = -1;
+    } else if (sum === 0) {
+      return 0;
+    }
     let i = 0;
     let npv = this.NPV(rate, cashflows);
 
