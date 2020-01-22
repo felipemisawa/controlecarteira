@@ -17,26 +17,30 @@ export class FinanceService {
     return npv;
   }
 
+  private derivativeNPV(rate: number, cashflows: number[]): number {
+    let dnpv = 0;
+    let i = 1;
+    for (const cf of cashflows) {
+      dnpv += (-(i - 1) * cf) / Math.pow(1 + rate, i - 1);
+      i++;
+    }
+    return dnpv;
+  }
+
   IRR(cashflows: number[], guess?: number): number {
     if (!guess) {
       guess = 0.0001;
     }
-    const investment = cashflows[0];
     let sum = 0;
     cashflows.forEach(cf => {
       sum += cf;
     });
     let rate = 1;
-    if (sum < 0) {
-      rate = -1;
-    } else if (sum === 0) {
-      return 0;
-    }
     let i = 0;
     let npv = this.NPV(rate, cashflows);
 
-    while (Math.abs(npv) > guess && i < 100) {
-      rate *= 1 - this.NPV(rate, cashflows) / investment;
+    while (Math.abs(npv) > guess && i < 10000) {
+      rate -= this.NPV(rate, cashflows) / this.derivativeNPV(rate, cashflows);
       npv = this.NPV(rate, cashflows);
       i++;
     }
