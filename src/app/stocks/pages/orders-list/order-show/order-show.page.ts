@@ -30,8 +30,6 @@ export class OrderShowPage implements OnInit {
 
   async init(): Promise<void> {
     const orderId = this.route.snapshot.paramMap.get(`orderid`);
-    const nums = [-500, 100, 200, 0];
-    console.log(this.finance.IRR(nums));
     if (!orderId) {
       this.overlayService.toast({ message: 'No ID found' });
       this.navCtrl.navigateBack('/orders');
