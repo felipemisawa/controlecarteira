@@ -99,7 +99,7 @@ export class OrderSavePage implements OnInit {
       await this.saveOrder();
       if (this.orderForm.value.type === 'V') {
         try {
-          this.calulateSell();
+          await this.calulateSell();
         } catch (error) {
           this.ordersService.delete(this.createdOrder);
           throw error;
@@ -174,11 +174,11 @@ export class OrderSavePage implements OnInit {
           .where('remainingAmount', '>', 0)
       )
       .pipe(take(1))
-      .subscribe(list => {
+      .subscribe(async list => {
         this.ordersList = list;
         if (this.ordersList.length > 0) {
           this.ordersList.sort((a, b) => (a.date > b.date ? 1 : -1));
-          this.calculateProfit();
+          await this.calculateProfit();
         } else {
           throw new Error('Query returned 0 results');
         }

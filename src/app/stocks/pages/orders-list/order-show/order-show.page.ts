@@ -5,7 +5,6 @@ import { NavController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { take } from 'rxjs/operators';
 import { Order } from 'src/app/stocks/models/order.model';
-import { FinanceService } from 'src/app/shared/services/finance.service';
 
 @Component({
   selector: 'app-order-show',
@@ -20,8 +19,7 @@ export class OrderShowPage implements OnInit {
     private ordersService: OrdersService,
     private overlayService: OverlayService,
     private navCtrl: NavController,
-    private route: ActivatedRoute,
-    private finance: FinanceService
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {

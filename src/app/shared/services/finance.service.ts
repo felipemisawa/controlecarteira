@@ -19,10 +19,8 @@ export class FinanceService {
 
   private derivativeNPV(rate: number, cashflows: number[]): number {
     let dnpv = 0;
-    let i = 1;
-    for (const cf of cashflows) {
-      dnpv += (-(i - 1) * cf) / Math.pow(1 + rate, i - 1);
-      i++;
+    for (let index = 0; index < cashflows.length; index++) {
+      dnpv += -cashflows[index] * index * Math.pow(1 + rate, -index - 1);
     }
     return dnpv;
   }
@@ -31,21 +29,27 @@ export class FinanceService {
     if (!guess) {
       guess = 0.0001;
     }
-    let sum = 0;
+    const tries = 10000;
+    let positive = 0;
+    let negative = 0;
     cashflows.forEach(cf => {
-      sum += cf;
+      if (cf > 0) {
+        positive += cf;
+      } else {
+        negative += cf;
+      }
     });
-    let rate = 1;
+    let rate = (positive + negative) / Math.abs(negative) - 1;
     let i = 0;
-    let npv = this.NPV(rate, cashflows);
+    let npv = 1;
 
-    while (Math.abs(npv) > guess && i < 10000) {
+    while (Math.abs(npv) > guess && i < tries) {
       rate -= this.NPV(rate, cashflows) / this.derivativeNPV(rate, cashflows);
       npv = this.NPV(rate, cashflows);
       i++;
     }
 
-    if (Math.abs(npv) > guess) {
+    if (i === tries) {
       throw new Error('Could not calculate IRR');
     } else {
       return rate;
