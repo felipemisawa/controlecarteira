@@ -29,7 +29,7 @@ export class FinanceService {
     if (!guess) {
       guess = 0.0001;
     }
-    const tries = 10000;
+    const tries = 100000;
     let positive = 0;
     let negative = 0;
     cashflows.forEach(cf => {
@@ -39,7 +39,10 @@ export class FinanceService {
         negative += cf;
       }
     });
-    let rate = (positive + negative) / Math.abs(negative) - 1;
+    if (positive + negative === 0) {
+      return 0;
+    }
+    let rate = (positive + negative) / Math.abs(negative);
     let i = 0;
     let npv = 1;
 
