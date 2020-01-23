@@ -29,7 +29,9 @@ export class FinanceService {
     if (!guess) {
       guess = 0.0001;
     }
-    const tries = 100000;
+    const tries = 100;
+    let nextRate = 0;
+    let previousRate = 0;
     let positive = 0;
     let negative = 0;
     cashflows.forEach(cf => {
@@ -39,17 +41,33 @@ export class FinanceService {
         negative += cf;
       }
     });
-    if (positive + negative === 0) {
-      return 0;
-    }
     let rate = (positive + negative) / Math.abs(negative);
+    if (rate > 1) {
+      rate = 1;
+    }
     let i = 0;
     let npv = 1;
 
-    while (Math.abs(npv) > guess && i < tries) {
-      rate -= this.NPV(rate, cashflows) / this.derivativeNPV(rate, cashflows);
-      npv = this.NPV(rate, cashflows);
-      i++;
+    if (rate > 0) {
+      while (Math.abs(npv) > guess && i < tries) {
+        console.log(`${this.NPV(rate, cashflows)}, ${rate}`);
+        nextRate = rate * (1 - this.NPV(rate, cashflows) / negative);
+        previousRate = rate;
+        rate = nextRate;
+        npv = this.NPV(nextRate, cashflows);
+        i++;
+      }
+    } else if (rate < 0) {
+      while (Math.abs(npv) > guess && i < tries) {
+        console.log(`${this.NPV(rate, cashflows)}, ${rate}`);
+        nextRate = rate - (this.NPV(rate, cashflows) / this.derivativeNPV(rate, cashflows));
+        previousRate = rate;
+        rate = nextRate;
+        npv = this.NPV(nextRate, cashflows);
+        i++;
+      }
+    } else {
+      return 0;
     }
 
     if (i === tries) {

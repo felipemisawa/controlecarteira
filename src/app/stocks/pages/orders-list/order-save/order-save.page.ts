@@ -127,12 +127,23 @@ export class OrderSavePage implements OnInit {
             const createdStock = await this.stocksService.create(this.stock);
             this.overlayService.toast({ message: `Stock Created: ${createdStock.ticker}` });
           } else {
-            if (this.createdOrder.type === 'C') {
-              stock[0].amount += this.createdOrder.amount;
-              stock[0].totalCost += this.createdOrder.orderTotal;
-            } else {
-              stock[0].amount -= this.createdOrder.amount;
-              stock[0].totalCost -= this.createdOrder.orderTotal - this.createdOrder.profit;
+            switch (this.createdOrder.type) {
+              case 'C':
+                stock[0].amount += this.createdOrder.amount;
+                stock[0].totalCost += this.createdOrder.orderTotal;
+                break;
+              case 'V':
+                stock[0].amount -= this.createdOrder.amount;
+                let negativeSum = 0;
+                this.sellList.forEach(item => {
+                  if (item.cashFlow < 0) {
+                    negativeSum += item.cashFlow;
+                  }
+                });
+                stock[0].totalCost += negativeSum;
+                break;
+              default:
+                throw new Error('Invalid order type');
             }
             if (stock[0].amount === 0) {
               await this.stocksService.delete(stock[0]);

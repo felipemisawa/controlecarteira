@@ -64,7 +64,7 @@
       {{orderData.orderTotal | currency:'BRL'}}
     </ion-label>
   </ion-item>
-  <div *ngIf="orderData.profit">
+  <div *ngIf="orderData.type == 'V'">
     <ion-item>
     <ion-label fixed slot="start" color="primary">
       Profit
