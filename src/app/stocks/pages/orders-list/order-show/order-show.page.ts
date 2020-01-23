@@ -5,7 +5,6 @@ import { NavController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { take } from 'rxjs/operators';
 import { Order } from 'src/app/stocks/models/order.model';
-import { FinanceService } from 'src/app/shared/services/finance.service';
 
 @Component({
   selector: 'app-order-show',
@@ -20,8 +19,7 @@ export class OrderShowPage implements OnInit {
     private ordersService: OrdersService,
     private overlayService: OverlayService,
     private navCtrl: NavController,
-    private route: ActivatedRoute,
-    private finance: FinanceService
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -30,9 +28,6 @@ export class OrderShowPage implements OnInit {
 
   async init(): Promise<void> {
     const orderId = this.route.snapshot.paramMap.get(`orderid`);
-    const nums = [-1000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5000];
-    // const nums = [-1000, 0, 0, -500, 100000];
-    console.log(this.finance.IRR(nums));
     if (!orderId) {
       this.overlayService.toast({ message: 'No ID found' });
       this.navCtrl.navigateBack('/orders');

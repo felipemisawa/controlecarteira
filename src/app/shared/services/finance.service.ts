@@ -50,7 +50,6 @@ export class FinanceService {
 
     if (rate > 0) {
       while (Math.abs(npv) > guess && i < tries) {
-        console.log(`${this.NPV(rate, cashflows)}, ${rate}`);
         nextRate = rate * (1 - this.NPV(rate, cashflows) / negative);
         previousRate = rate;
         rate = nextRate;
@@ -59,7 +58,6 @@ export class FinanceService {
       }
     } else if (rate < 0) {
       while (Math.abs(npv) > guess && i < tries) {
-        console.log(`${this.NPV(rate, cashflows)}, ${rate}`);
         nextRate = rate - (this.NPV(rate, cashflows) / this.derivativeNPV(rate, cashflows));
         previousRate = rate;
         rate = nextRate;
