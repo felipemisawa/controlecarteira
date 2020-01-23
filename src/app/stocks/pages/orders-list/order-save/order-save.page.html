@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content class="ion-padding">
   <form [formGroup]="orderForm" (submit)="onSubmit()">
     <ion-item>
       <ion-icon name="checkmark" slot="start" color="primary"></ion-icon>
@@ -24,7 +24,7 @@
         placeholder="Date"
         inputmode="date"
         formControlName="date"
-        text-left
+        class="ion-text-left"
       >
       </ion-datetime>
     </ion-item>

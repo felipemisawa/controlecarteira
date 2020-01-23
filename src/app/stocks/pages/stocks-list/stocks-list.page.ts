@@ -21,7 +21,7 @@ export class StocksListPage {
   async ionViewDidEnter(): Promise<void> {
     const loading = await this.overlayService.loading();
     try {
-      this.stocks$ = this.stocksService.getQuery(query => query.where('amount', '>', 0));
+      this.stocks$ = this.stocksService.getAll();
     } catch (error) {
       this.overlayService.toast({ message: `Error fetching data: ${error.message}` });
     } finally {

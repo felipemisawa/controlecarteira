@@ -19,7 +19,7 @@ export class StocksService extends Firestore<Stock> {
     this.authService.authState$.subscribe(user => {
       if (user) {
         this.setCollection(`/users/${user.uid}/stocks`, (ref: firestore.CollectionReference) => {
-          return ref.orderBy('ticker', 'asc');
+          return ref.orderBy('label', 'asc').orderBy('ticker', 'asc');
         });
         return;
       }

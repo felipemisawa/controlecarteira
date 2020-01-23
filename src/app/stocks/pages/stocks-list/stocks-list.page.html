@@ -8,27 +8,13 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-  <ion-item>
-    <ion-label
-      side="center"
-      text-center
-    >
-      Ticker
-    </ion-label>
-    <ion-label
-      side="center"
-      text-center
-    >
-      Amount
-    </ion-label>
-    <ion-label
-      side="center"
-      text-center
-    >
-      Total Cost
-    </ion-label>
-  </ion-item>
+<ion-content class="ion-padding">
+  <ion-list-header>
+    <ion-label>Label</ion-label>
+    <ion-label>Ticker</ion-label>
+    <ion-label>Amount</ion-label>
+    <ion-label>Total Cost</ion-label>
+  </ion-list-header>
   <ion-list *ngIf="(stocks$ | async) as stocks">
     <ng-container *ngIf="stocks.length > 0; else noStocks">
       <app-stock-item

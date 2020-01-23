@@ -1,20 +1,30 @@
-<ion-item (click)="show.emit(stock)">
-  <ion-label
-    side="start"
-    text-center
-  >
+<ion-item (click)="show.emit(stock)" class="ion-justify-content-evenly">
+  <div *ngIf="stock.label==''; else editLabel">
+    <ion-button
+      color="transparent"
+      (click)="saveLabel(); $event.stopPropagation()"
+    >
+      <ion-icon
+        slot="icon-only"
+        name="add"
+        color="primary"
+      ></ion-icon>
+    </ion-button>
+  </div>
+  <ng-template #editLabel>
+    <div (click)="saveLabel(); $event.stopPropagation()">
+      <ion-label>
+        {{ stock.label }}
+      </ion-label>
+    </div>
+  </ng-template>
+  <ion-label class="ion-text-right">
     {{ stock.ticker }}
   </ion-label>
-  <ion-label
-    side="center"
-    text-center
-  >
+  <ion-label class="ion-text-center">
     {{ stock.amount }}
   </ion-label>
-  <ion-label
-    side="center"
-    text-center
-  >
+  <ion-label class="ion-text-right">
     {{ stock.totalCost | currency:'BRL' }}
   </ion-label>
 </ion-item>

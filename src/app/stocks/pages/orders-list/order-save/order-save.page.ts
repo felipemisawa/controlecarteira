@@ -29,7 +29,8 @@ export class OrderSavePage implements OnInit {
     totalCost: undefined,
     currentValue: 0,
     currentProfit: 0,
-    monthlyYield: 0
+    monthlyYield: 0,
+    label: ''
   };
   sellList: { date: Date; cashFlow: number }[] = [];
 

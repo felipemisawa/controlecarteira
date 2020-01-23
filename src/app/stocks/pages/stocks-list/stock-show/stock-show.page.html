@@ -1,25 +1,19 @@
 <ion-header>
   <ion-toolbar color="primary">
-     <ion-buttons slot="start">
+    <ion-buttons slot="start">
       <ion-back-button defaultHref="/stocks"></ion-back-button>
     </ion-buttons>
     <ion-title>Orders List</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-  <ion-item>
-    <ion-label side="start">Type</ion-label>
-    <ion-label side="center" text-center>
-      Amount
-    </ion-label>
-    <ion-label side="center" text-center>
-      Ticker
-    </ion-label>
-    <ion-label side="end" text-right>
-      Date
-    </ion-label>
-  </ion-item>
+<ion-content class="ion-padding">
+  <ion-list-header>
+    <ion-label>Type</ion-label>
+    <ion-label>Amount</ion-label>
+    <ion-label>Ticker</ion-label>
+    <ion-label>Date</ion-label>
+  </ion-list-header>
   <ion-list *ngIf="(orders$ | async) as orders">
     <ng-container *ngIf="orders.length > 0; else noOrders">
       <app-order-item
@@ -35,8 +29,15 @@
     </ng-template>
   </ion-list>
 
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button routerLink="/orders/create" routerDirection="forward">
+  <ion-fab
+    vertical="bottom"
+    horizontal="end"
+    slot="fixed"
+  >
+    <ion-fab-button
+      routerLink="/orders/create"
+      routerDirection="forward"
+    >
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>

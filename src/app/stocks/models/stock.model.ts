@@ -1,5 +1,6 @@
 export interface Stock {
   id: string;
+  label: string;
   ticker: string;
   amount: number;
   currentPrice: number;
