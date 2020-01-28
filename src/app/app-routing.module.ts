@@ -17,6 +17,14 @@ const routes: Routes = [
     path: 'orders',
     loadChildren: './stocks/modules/orders-module/orders.module#OrdersModule',
     canLoad: [AuthGuard]
+  },
+  {
+    path: 'dividends',
+    loadChildren: () =>
+      import('./stocks/pages/dividends-list/dividends-list.module').then(
+        m => m.DividendsListPageModule
+      ),
+    canLoad: [AuthGuard]
   }
 ];
 

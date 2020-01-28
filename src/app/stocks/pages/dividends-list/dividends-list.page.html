@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/stocks"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Dividends List</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list-header>
+    <ion-label>Ticker</ion-label>
+    <ion-label>Type</ion-label>
+    <ion-label>Amount</ion-label>
+    <ion-label>Date</ion-label>
+  </ion-list-header>
+  <ion-list *ngIf="(dividends$) as dividends">
+    <ng-container *ngIf="dividends.length > 0; else noDividends">
+      <app-dividend-item
+        *ngFor="let dividend of dividends"
+        [dividend]="dividend"
+      ></app-dividend-item>
+    </ng-container>
+    <ng-template #noDividends>
+      <ion-item lines="none">No dividend found!</ion-item>
+    </ng-template>
+  </ion-list>
+
+  <ion-fab
+    vertical="bottom"
+    horizontal="end"
+    slot="fixed"
+  >
+    <ion-fab-button
+      routerLink="/dividend/create"
+      routerDirection="forward"
+    >
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

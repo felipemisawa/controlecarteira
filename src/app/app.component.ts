@@ -51,8 +51,9 @@ export class AppComponent {
         text: 'Stocks',
         open: false,
         children: [
-          { url: '/orders', direction: 'forward', icon: 'walk', text: 'Orders' },
-          { url: '/orders/create', direction: 'forward', icon: 'add', text: 'Add Order' }
+          { url: '/orders', direction: 'forward', icon: 'menu', text: 'Orders' },
+          { url: '/orders/create', direction: 'forward', icon: 'add', text: 'Add Order' },
+          { url: '/dividends', direction: 'forward', icon: 'menu', text: 'Dividends' }
         ]
       }
     ];

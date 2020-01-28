@@ -1,0 +1,6 @@
+<ion-item class="ion-justify-content-evenly">
+  <ion-label class="ion-text-left">{{ dividend.ticker }}</ion-label>
+  <ion-label class="ion-text-center">{{ dividend.type }}</ion-label>
+  <ion-label class="ion-text-center">{{ dividend.amount | currency:'BRL' }}</ion-label>
+  <ion-label class="ion-text-right">{{ dividend.date | date:'dd/MM/yyyy' }}</ion-label>
+</ion-item>
